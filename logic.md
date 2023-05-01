@@ -6,7 +6,7 @@
 
 ```mermaid
 flowchart TD
-    Start([Buzzer])
+    Start([PiezoSpeaker])
     getButtonStatus(Get button status)
     checkButton{Has button pressed}
     soundBuzzer(Play sound)
@@ -17,3 +17,17 @@ flowchart TD
     checkButton --> |No| finish
     soundBuzzer --> finish
 ```
+
+## LEDLights system
+```mermaid
+flowchart TD
+    Start([LEDLights])
+    getAllThreeLights(Get Red,Yellow & Green LED Lights)
+    checkElectricDetected{Light up the LED Lights}
+    LEDLightsActivated(Activated)
+    finish([End])
+
+    Start --> getAllThreeLights --> checkElectricDetected
+    checkElectricDetected --> |Yes| LEDLightsActivated
+    checkElectricDetected --> |No| finish
+    LEDLightsActivated --> finish
