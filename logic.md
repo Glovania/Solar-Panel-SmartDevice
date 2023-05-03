@@ -23,8 +23,8 @@ flowchart TD
 flowchart TD
     Start([LEDLights])
     getAllThreeLights(Get Red,Yellow & Green LED Lights)
-    checkElectricDetected{Light up the LED Lights}
-    LEDLightsActivated(Activated)
+    checkElectricDetected{Receive electricity}
+    LEDLightsActivated(Light up the LED Lights)
     finish([End])
 
     Start --> getAllThreeLights --> checkElectricDetected
