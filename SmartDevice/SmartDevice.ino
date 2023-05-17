@@ -32,7 +32,13 @@ void loop() {
 
   // put your main code here, to run repeatedly:
 
-  RotaryPotentiometer();
+  rotaryPotentiometer();
+  servoMotor();
+  LDR();
+  crashSensor();
+  LED_Display();
+  piezoButton();
+  SolarTracker();
 
   delay(500);
 
@@ -45,13 +51,13 @@ Using the Potentiometer, determines at which bytes the device will start to opea
 @return none.
 
 */
-void RotaryPotentiometer() {
+void rotaryPotentiometer() {
 
 }
 
 /*
 
-If the Servo Motor is activated, rotate the Solar Panel so that it can observe tje Sun in multi-direction.
+If the Servo Motor is activated, rotate the Solar Panel so that it can observe the Sun in multi-direction.
 @params none.
 @return none.
 
@@ -102,15 +108,10 @@ When the Solar Panel detected where the Sun is, play a confirm sound from the Bu
 @return none.
 
 */
-void buzzerButton() {
+void piezoButton() {
 
 }
 
-/*
 
-If the Solar Tracker is activated, starts detecting the 
-
-*/
-void SolarTracker() {
-
-}
+// https://circuitdigest.com/microcontroller-projects/building-your-own-sun-tracking-solar-panel-using-arduino link to follow on with the project.
+// https://circuitdigest.com/microcontroller-projects/arduino-solar-panel-tracker another one.
