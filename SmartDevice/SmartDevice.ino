@@ -10,10 +10,21 @@ DateTime rightNow;  // used to store the current time.
 // SD Card - Confirm Pin
 #define SDpin 10
 
+//LED Lights - INPUT
+#define LED_RED_PIN       4
+#define LED_YELLOW_PIN    5
+#define LED_GREEN_PIN     6
+
+
 void setup() {
 
   // put your setup code here, to run once:
   
+  // Output the LED Lights so it could show whether the Solar Panel worked perfectly or not.
+  digitalWrite(LED_RED_PIN, OUTPUT);
+  digitalWrite(LED_YELLOW_PIN, OUTPUT);
+  digitalWrite(LED_GREEN_PIN, OUTPUT);
+
   Serial.begin(9600);  // Open serial communications and wait for port to open:
   while (!Serial) {
     delay(1);  // wait for serial port to connect. Needed for native USB port only
@@ -38,7 +49,6 @@ void loop() {
   crashSensor();
   LED_Display();
   piezoButton();
-  SolarTracker();
 
   delay(500);
 
