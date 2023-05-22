@@ -11,20 +11,19 @@ DateTime rightNow;  // used to store the current time.
 #define SDpin 10
 
 //LED Lights - INPUT
-#define LED_RED_PIN       4
-#define LED_YELLOW_PIN    5
-#define LED_GREEN_PIN     6
+#define LED_RED_PIN 4
+#define LED_YELLOW_PIN 5
+#define LED_GREEN_PIN 6
 
 
 void setup() {
 
   // put your setup code here, to run once:
-  
-  // Output the LED Lights so it could show whether the Solar Panel worked perfectly or not.
-  digitalWrite(LED_RED_PIN, OUTPUT);
-  digitalWrite(LED_YELLOW_PIN, OUTPUT);
-  digitalWrite(LED_GREEN_PIN, OUTPUT);
 
+  // Output the LED Lights so it could show whether the Solar Panel worked perfectly or not.
+  pinMode(LED_RED_PIN, OUTPUT);
+  pinMode(LED_YELLOW_PIN, OUTPUT);
+  pinMode(LED_GREEN_PIN, OUTPUT);
   Serial.begin(9600);  // Open serial communications and wait for port to open:
   while (!Serial) {
     delay(1);  // wait for serial port to connect. Needed for native USB port only
@@ -37,6 +36,10 @@ void setup() {
     while (1)
       ;
   }
+  // Real Time Clock (RTC)
+  rtc.begin(DateTime(F(__DATE__), F(__TIME__)));
+  Serial.println("initialization done.");
+  logEvent("System Initialisation...");
 }
 
 void loop() {
@@ -51,7 +54,55 @@ void loop() {
   piezoButton();
 
   delay(500);
+}
 
+
+void logEvent(String dataToLog) {
+  /*
+     Log entries to a file on an SD card.
+  */
+  // Get the updated/current time
+  DateTime rightNow = rtc.now();
+
+  // Open the log file
+  File logFile = SD.open("events.csv", FILE_WRITE);
+  if (!logFile) {
+    Serial.print("Couldn't create log file");
+    abort();
+  }
+
+  // Log the event with the date, time and data
+  logFile.print(rightNow.year(), DEC);
+  logFile.print(",");
+  logFile.print(rightNow.month(), DEC);
+  logFile.print(",");
+  logFile.print(rightNow.day(), DEC);
+  logFile.print(",");
+  logFile.print(rightNow.hour(), DEC);
+  logFile.print(",");
+  logFile.print(rightNow.minute(), DEC);
+  logFile.print(",");
+  logFile.print(rightNow.second(), DEC);
+  logFile.print(",");
+  logFile.print(dataToLog);
+
+  // End the line with a return character.
+  logFile.println();
+  logFile.close();
+  Serial.print("Event Logged: ");
+  Serial.print(rightNow.year(), DEC);
+  Serial.print(",");
+  Serial.print(rightNow.month(), DEC);
+  Serial.print(",");
+  Serial.print(rightNow.day(), DEC);
+  Serial.print(",");
+  Serial.print(rightNow.hour(), DEC);
+  Serial.print(",");
+  Serial.print(rightNow.minute(), DEC);
+  Serial.print(",");
+  Serial.print(rightNow.second(), DEC);
+  Serial.print(",");
+  Serial.println(dataToLog);
 }
 
 /*
@@ -62,7 +113,6 @@ Using the Potentiometer, determines at which bytes the device will start to opea
 
 */
 void rotaryPotentiometer() {
-
 }
 
 /*
@@ -73,7 +123,6 @@ If the Servo Motor is activated, rotate the Solar Panel so that it can observe t
 
 */
 void servoMotor() {
-
 }
 
 /*
@@ -84,7 +133,6 @@ If the LDRs are activated, detects the highest possible light levels.
 
 */
 void LDR() {
-
 }
 
 /*
@@ -95,7 +143,6 @@ If the Crash Sensor being pressed, operates the Solar Panel.
 
 */
 void crashSensor() {
-
 }
 
 
@@ -107,19 +154,17 @@ When the Solar Panel started to observing and converting the Sun energies into e
 
 */
 void LED_Display() {
-
 }
 
 
 /*
 
-When the Solar Panel detected where the Sun is, play a confirm sound from the Buzzer.
+When the Solar Panel detected where the Sun is, play a confirm sound from the Piezo.
 @params none.
 @return none.
 
 */
 void piezoButton() {
-
 }
 
 
