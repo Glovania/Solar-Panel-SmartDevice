@@ -8,12 +8,15 @@ RTC_Millis rtc;     // Software Real Time Clock (RTC)
 DateTime rightNow;  // used to store the current time.
 
 // SD Card - Confirm Pin
-#define SDpin 10
+#define SDpin           10
 
-//LED Lights - INPUT
-#define LED_RED_PIN 4
-#define LED_YELLOW_PIN 5
-#define LED_GREEN_PIN 6
+//Rotary Potentiometer - Confirm Pin
+#define Potentiometer   A3
+
+//LED Lights - Confirm Pins
+#define LED_RED_PIN     4
+#define LED_YELLOW_PIN  5
+#define LED_GREEN_PIN   6
 
 
 void setup() {
