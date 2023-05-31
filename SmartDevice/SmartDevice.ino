@@ -27,6 +27,8 @@ int west = 0;
 int error = 0;
 
 int calibration = 600;
+
+// Set angle for the Servo
 int servoposition = 90;
 
 
