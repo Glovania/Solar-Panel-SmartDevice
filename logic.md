@@ -1,28 +1,37 @@
-# Example of a Flowchart
+# Logic
+> For each behaviour, create the mermaid flowchart. Start each flowchart with a Heading naming the functionality. Delete this comment prior to submission.
+
 ## CrashSensor
 
 ## Servo
 
-##  
+## Buzzer system
+
 ```mermaid
 flowchart TD
-    terminalStart([Start])
-    %% Comment
-    terminalEnd([End])
-    thresholdSet(distanceThreshold = 30)
-    setPiezoPin(piezoPin = 2)
-    currentDistanceReading(distanceRead = response from Sonar)
-    activatePiezo(write HIGH to piezoPin)
-    deactivatePiezo(write LOW to piezoPin)
+    Start([Buzzer])
+    getButtonStatus(Get button status)
+    checkButton{Has button pressed}
+    soundBuzzer(Play sound)
+    finish([End])
 
-    ifDistanceLessThanThreshold{distanceRead < distanceThreshold}
+    Start --> getButtonStatus --> checkButton
+    checkButton --> |Yes| soundBuzzer
+    checkButton --> |No| finish
+    soundBuzzer --> finish
+```
 
-    terminalStart --> thresholdSet
-    thresholdSet --> setPiezoPin
-    setPiezoPin --> currentDistanceReading
-    currentDistanceReading --> ifDistanceLessThanThreshold
-    ifDistanceLessThanThreshold --> |True| activatePiezo
-    ifDistanceLessThanThreshold --> |False| deactivatePiezo
-    deactivatePiezo --> terminalEnd
-    activatePiezo --> terminalEnd
+## LEDLights system
+```mermaid
+flowchart TD
+    Start([LEDLights])
+    getAllThreeLights(Get Red,Yellow & Green LED Lights)
+    checkElectricDetected{Light up the LED Lights}
+    LEDLightsActivated(Activated)
+    finish([End])
+
+    Start --> getAllThreeLights --> checkElectricDetected
+    checkElectricDetected --> |Yes| LEDLightsActivated
+    checkElectricDetected --> |No| finish
+    LEDLightsActivated --> finish
 ```
