@@ -42,7 +42,7 @@ void loop() {
   activeCrashSensor();                                              // Loops the crashSensor function.
   solarTracker();                                                   // Loops the SolarTracker function.
   delay(1000);                                                      // Wait for 1000 miliseconds = 1 second.
-// }
+}
 
 
 void logEvent(String dataToLog) {
