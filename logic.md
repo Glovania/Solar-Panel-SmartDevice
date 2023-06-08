@@ -54,7 +54,12 @@ flowchart TD
     GetLDR1Values{Get values}
     GetLDR2Values{Get values}
     CheckForLightLevels(Check for observable light levels area)
-    
+    SentValueToServoMotor(Sent the value to Servo Motor)
+    PrintOutError([Print error])
 
-    Start --> InputLDR1 --> GetLDR1Values --> CheckForLightLevels
+
+    Start --> InputLDR1 --> GetLDR1Values --> CheckForLightLevels 
     Start --> InputLDR2 --> GetLDR2Values --> CheckForLightLevels
+    
+    CheckForLightLevels --> |Detected| SentValueToServoMotor
+    CheckForLightLevels --> |Undetected| PrintOutError
