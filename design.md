@@ -9,4 +9,6 @@
 
 - When LDRs are activated, detect light levels and sent the value to Servo Motor to start rotating with the observable sun light. (Can use phone's flashflight for a quick demostration).
 
-- When the Servo Motor is activated, rotate the Solar Panel based on the light detected from the LDR's values.
+- When Servo Motor is activated, rotate the Solar Panel based on the light detected from the LDR's values.
+
+- When Potentiometer is activated, take the value from the Serial and stop the program whenever it goes below the fixed value for the Potentiometer.
