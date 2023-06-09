@@ -1,5 +1,6 @@
 # Logic
 > This is the Logic for each items in the Smart Solar Tracker Project.
+
 ## CrashSensor
 ```mermaid
 flowchart TD
@@ -14,6 +15,7 @@ flowchart TD
     CheckButton --> |Yes| Activate
     CheckButton --> |No| Finish
 ``` 
+
 ## Servo Motor
 ```mermaid
 flowchart TD
