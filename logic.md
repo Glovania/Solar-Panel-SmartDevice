@@ -29,22 +29,6 @@ flowchart TD
     ReceiveLDRsValue --> |No| PrintOutError
 ```
 
-## Potentiometer
-```mermaid
-flowchart TD
-    Start([Potentiometer])
-    InputPotentiometer(Get Input)
-    GetPotentiometerValues{Get fixed values}
-    Check(Check)
-    Activate(Run the project)
-    Deactivate(Stop the project)
-    Debug(Print the value)
-
-
-    Start --> InputPotentiometer --> GetPotentiometerValues --> Check
-    Check --> |<=1023| Activate --> Debug
-    Check --> |>=100| Deactivate --> Debug
-```
 ## LDRs
 ```mermaid
 flowchart TD
