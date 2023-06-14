@@ -1,6 +1,29 @@
 # Logic
 > This is the Logic for each items in the Smart Solar Tracker Project.
 
+## LDRs
+```mermaid
+flowchart TD
+%% Comment
+    Start([Light Dependent Resistors])
+    InputLDR1(Get LDR 1 Input)
+    InputLDR2(Get LDR 2 Input)
+    GetLDRValues{Get LDR values}
+    CheckForLightLevels{Check for observable light levels area}
+    SentValueToServoMotor(Sent the value to Servo Motor)
+    End([End])
+
+
+    Start ==> InputLDR1 ==> InputLDR2 ==> GetLDRValues
+    SentValueToServoMotor ==> End
+
+    CheckForLightLevels ---> |Detected| SentValueToServoMotor
+    CheckForLightLevels --> |Undetected| End
+
+    GetLDRValues --> |No| End
+    GetLDRValues --> |Yes| CheckForLightLevels
+```
+
 ## CrashSensor
 ```mermaid
 flowchart TD
@@ -41,25 +64,3 @@ flowchart TD
     GetServoMotorValues --> |Yes| ReceiveLDRsValue
     GetServoMotorValues --> |No| End
 ```
-
-## LDRs
-```mermaid
-flowchart TD
-%% Comment
-    Start([Light Dependent Resistors])
-    InputLDR1(Get LDR 1 Input)
-    InputLDR2(Get LDR 2 Input)
-    GetLDRValues{Get LDR values}
-    CheckForLightLevels{Check for observable light levels area}
-    SentValueToServoMotor(Sent the value to Servo Motor)
-    End([End])
-
-
-    Start ==> InputLDR1 ===> GetLDRValues
-    Start ==> InputLDR2 ==> GetLDRValues
-
-    CheckForLightLevels ---> |Detected| SentValueToServoMotor
-    CheckForLightLevels --> |Undetected| End
-
-    GetLDRValues --> |No| End
-    GetLDRValues --> |Yes| CheckForLightLevels
