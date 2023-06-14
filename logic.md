@@ -7,14 +7,18 @@ flowchart TD
 %% Comment
     Start([Crash Sensor])
     InputCrashSensor(Get Input)
-    GetCrashSensorValue{Get values}
-    CheckButton(Has the Button pressed)
-    Activate(Re-run the project)
-    Finish([End])
+    GetCrashSensorValue{Get Crash Sensor values}
+    CheckButton{Has the Button pressed}
+    Activate(Resume the project)
+    End([End])
 
-    Start --> InputCrashSensor --> GetCrashSensorValue --> CheckButton
-    CheckButton -.-> |Yes| Activate
-    CheckButton -.-> |No| Finish
+    Start ==> InputCrashSensor ==> GetCrashSensorValue
+
+    CheckButton --> |Yes| Activate
+    CheckButton ---> |No| End
+
+    GetCrashSensorValue --> |No| End
+    GetCrashSensorValue --> |Yes| CheckButton
 ``` 
 
 ## Servo Motor
@@ -24,32 +28,38 @@ flowchart TD
     Start([Servo Motor])
     GetServoMotorExtensionLibrary(Get Servo Motor extension library)
     InputServoMotor(Get Input)
+    GetServoMotorValues{Get Servo Motor values}
     ReceiveLDRsValue{Receive LDRs value}
     SpinTheSolarCell(Rotate Solar Cell)
-    PrintOutError([Print error])
+    End([End])
 
-    Start --> GetServoMotorExtensionLibrary --> InputServoMotor --> ReceiveLDRsValue
-    ReceiveLDRsValue -.-> |Yes| SpinTheSolarCell
-    ReceiveLDRsValue -.-> |No| PrintOutError
+    Start ==> GetServoMotorExtensionLibrary ==> InputServoMotor ==> GetServoMotorValues
+    
+    ReceiveLDRsValue --> |Yes| SpinTheSolarCell
+    ReceiveLDRsValue --> |No| End
+
+    GetServoMotorValues --> |Yes| ReceiveLDRsValue
+    GetServoMotorValues --> |No| End
 ```
 
 ## LDRs
 ```mermaid
 flowchart TD
 %% Comment
-    Start([LDRs])
-    InputLDR1(Get east LDR Input)
-    InputLDR2(Get west LDR Input)
-    GetValues{Get values}
-    CheckForLightLevels(Check for observable light levels area)
+    Start([Light Dependent Resistors])
+    InputLDR1(Get LDR 1 Input)
+    InputLDR2(Get LDR 2 Input)
+    GetLDRValues{Get LDR values}
+    CheckForLightLevels{Check for observable light levels area}
     SentValueToServoMotor(Sent the value to Servo Motor)
-    PrintOutError([Print error])
+    End([End])
 
 
-    Start --> InputLDR1 --> GetValues
-    Start --> InputLDR2 --> GetValues
-    
-    GetValues --> CheckForLightLevels
+    Start ==> InputLDR1 ===> GetLDRValues
+    Start ==> InputLDR2 ==> GetLDRValues
 
-    CheckForLightLevels -.-> |Detected| SentValueToServoMotor
-    CheckForLightLevels -.-> |Undetected| PrintOutError
+    CheckForLightLevels ---> |Detected| SentValueToServoMotor
+    CheckForLightLevels --> |Undetected| End
+
+    GetLDRValues --> |No| End
+    GetLDRValues --> |Yes| CheckForLightLevels
